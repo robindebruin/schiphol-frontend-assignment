@@ -23,7 +23,10 @@ app.get("/flights", (req, res) => {
 
     try {
       const jsonData = JSON.parse(data);
-      res.json(jsonData);
+      setTimeout(() => {
+        res.json(jsonData);
+        // timeout to simulate slow network and test loading state
+      }, 4000);
     } catch (parseError) {
       res.status(500).json({ error: "Failed to parse JSON" });
     }
