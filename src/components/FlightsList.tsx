@@ -35,6 +35,7 @@ export const FlightsList = ({ query, sort }: FlightsListProps) => {
 
   if (error) return "An error has occurred: " + error.message;
 
+  // TODO: add no results found vs no input
   if (query.length < 3) return;
 
   // TODO: add accessibility

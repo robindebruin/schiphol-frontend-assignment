@@ -11,10 +11,15 @@ export const Flights = () => {
   return (
     <div className="w-3/4 m-auto">
       <FlightSearchInput handleSearch={setFlightsQuery} />
-      <div className="flex justify-end mb-4">
-        <FlightsSort sort={sort} handleSort={setSort} />
-      </div>
-      {flightsQuery && <FlightsList query={flightsQuery} sort={sort} />}
+
+      {flightsQuery && (
+        <>
+          <div className="flex justify-end mb-4">
+            <FlightsSort sort={sort} handleSort={setSort} />
+          </div>
+          <FlightsList query={flightsQuery} sort={sort} />
+        </>
+      )}
     </div>
   );
 };

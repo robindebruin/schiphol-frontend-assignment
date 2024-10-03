@@ -12,23 +12,22 @@ export const FlightSearchInput = ({ handleSearch }: FlightSearchInputProps) => {
     }
     handleSearch(query);
   };
-  const filterFlightsDebounce = (q: string, debounceTime = 300) =>
-    debounce(() => filterFlights(q), debounceTime);
+
+  const filterFlightsDebounce = debounce(filterFlights, 300);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    filterFlightsDebounce(e.target.value)();
+    filterFlightsDebounce(e.target.value);
+    // TODO: clear api calls which are still pending
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      // clears the debounce
-      filterFlightsDebounce(e.currentTarget.value).trigger();
+      // TODO: use to ignore debounce and search immediately
     }
   };
 
-  // TODO: add clear button
-
   return (
+    // TODO: add clear button
     <div className="h-32 flex items-center max-w-[664px] m-auto">
       <input
         type="text"
