@@ -22,7 +22,9 @@ export const FlightSearchInput = ({ handleSearch }: FlightSearchInputProps) => {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      // TODO: use to ignore debounce and search immediately
+      // ignore debounce and search immediately
+      filterFlightsDebounce(e.currentTarget.value);
+      filterFlightsDebounce.trigger();
     }
   };
 

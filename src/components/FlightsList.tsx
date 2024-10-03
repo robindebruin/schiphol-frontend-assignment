@@ -33,7 +33,12 @@ export const FlightsList = ({ query, sort }: FlightsListProps) => {
   if (isPending)
     return <div className="text-xl text-fuchsia-500">"Loading..."</div>;
 
-  if (error) return "An error has occurred: " + error.message;
+  if (error)
+    return (
+      <div className="text-xl text-red-500">
+        {`"An error has occurred: ${error.message}`}
+      </div>
+    );
 
   // TODO: add no results found vs no input
   if (query.length < 3) return;
