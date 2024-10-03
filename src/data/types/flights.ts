@@ -9,6 +9,7 @@ export interface Flight {
     score: string;
     }
 
-export interface Flights {
+export interface FlightsResponse {
     flights: Flight[];
+    
     }
