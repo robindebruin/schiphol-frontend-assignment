@@ -14,10 +14,12 @@ export const Flights = ({ flights }: FlightsProps) => {
   const [sort, setSort] = useState<Sort>("asc");
 
   return (
-    <>
+    <div className="w-3/4 m-auto">
       <FlightSearchInput flights={flights} handleSearch={setFilteredFlights} />
-      <FlightsSort sort={sort} handleSort={setSort} />
+      <div className="flex justify-end mb-4">
+        <FlightsSort sort={sort} handleSort={setSort} />
+      </div>
       <FlightsList flights={sortFlights(sort, filteredFlights)} />
-    </>
+    </div>
   );
 };
