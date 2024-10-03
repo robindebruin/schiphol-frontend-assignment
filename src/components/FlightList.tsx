@@ -1,7 +1,7 @@
 import { queryOptions, useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 import { FlightsResponse } from "../data/types/flights";
-import { Sort, sortFlights } from "./sortFlights";
+import { Sort, sortFlights } from "./flightsSort";
 
 type FlightsListProps = {
   query: string;
@@ -26,7 +26,7 @@ const fetchFlightsOptions = (query: string) => {
   });
 };
 
-export const FlightsList = ({ query, sort }: FlightsListProps) => {
+export const FlightList = ({ query, sort }: FlightsListProps) => {
   const { isPending, error, data } = useQuery(fetchFlightsOptions(query));
 
   // TODO: make proper loading and error components

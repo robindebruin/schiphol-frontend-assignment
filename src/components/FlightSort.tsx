@@ -1,13 +1,13 @@
 import arrowUp from "./../assets/arrow_up.svg";
 
-import { Sort } from "./sortFlights";
+import { Sort } from "./flightsSort";
 
 type FlightsSortProps = {
   sort: Sort;
   handleSort: (sort: Sort) => void;
 };
 
-export const FlightsSort = ({ sort, handleSort }: FlightsSortProps) => {
+export const FlightSort = ({ sort, handleSort }: FlightsSortProps) => {
   const handleOnClick = () => {
     handleSort(sort === "asc" ? "desc" : "asc");
   };

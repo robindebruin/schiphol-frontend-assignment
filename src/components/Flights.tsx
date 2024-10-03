@@ -1,8 +1,8 @@
 import { useState } from "react";
+import { FlightList } from "./FlightList";
 import { FlightSearchInput } from "./FlightSearchInput";
-import { FlightsList } from "./FlightsList";
-import { FlightsSort } from "./FlightsSort";
-import { Sort } from "./sortFlights";
+import { FlightSort } from "./FlightSort";
+import { Sort } from "./flightsSort";
 
 export const Flights = () => {
   const [flightsQuery, setFlightsQuery] = useState("");
@@ -15,9 +15,9 @@ export const Flights = () => {
       {flightsQuery && (
         <>
           <div className="flex justify-end mb-4">
-            <FlightsSort sort={sort} handleSort={setSort} />
+            <FlightSort sort={sort} handleSort={setSort} />
           </div>
-          <FlightsList query={flightsQuery} sort={sort} />
+          <FlightList query={flightsQuery} sort={sort} />
         </>
       )}
     </div>
