@@ -13,14 +13,11 @@ export const Overview = () => {
     queryFn: fetchFlights,
   });
 
-  const [search, setSearch] = React.useState("");
   const [filteredFlights, setFilteredFlights] = React.useState(
     data?.flights || []
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-    setSearch(e.target.value);
     filterFlights(e.target.value);
     // TODO: use debounce
   };
@@ -28,8 +25,6 @@ export const Overview = () => {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     // TODO: use to ignore debounce
     if (e.key === "Enter") {
-      console.log("Enter key pressed");
-      setSearch(e.currentTarget.value);
       filterFlights(e.currentTarget.value);
     }
   };
@@ -55,10 +50,7 @@ export const Overview = () => {
   return (
     <div>
       <input type="text" onChange={handleChange} onKeyDown={handleKeyDown} />
-      <div>{search}</div>
-      <ul>
-        <FlightsList flights={filteredFlights} />
-      </ul>
+      <FlightsList flights={filteredFlights} />
     </div>
   );
 };

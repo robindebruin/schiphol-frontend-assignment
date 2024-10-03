@@ -5,5 +5,9 @@ type FlightListItemProps = {
 };
 
 export const FlightListItem = ({ flight }: FlightListItemProps) => {
-  return <li key={flight.flightIdentifier}>{flight.airport}</li>;
+  return (
+    <li key={flight.flightIdentifier}>
+      {flight.airport} {flight.date} {flight.expectedTime}
+    </li>
+  );
 };
