@@ -14,6 +14,9 @@ dependencies:
   dayjs:
     specifier: ^1.11.13
     version: 1.11.13
+  debounce:
+    specifier: ^2.1.1
+    version: 2.1.1
   express:
     specifier: ^4.21.0
     version: 4.21.0
@@ -1258,6 +1261,11 @@ packages:
 
   /dayjs@1.11.13:
     resolution: {integrity: sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==}
+    dev: false
+
+  /debounce@2.1.1:
+    resolution: {integrity: sha512-+xRWxgel9LgTC4PwKlm7TJUK6B6qsEK77NaiNvXmeQ7Y3e6OVVsBC4a9BSptS/mAYceyAz37Oa8JTTuPRft7uQ==}
+    engines: {node: '>=18'}
     dev: false
 
   /debug@2.6.9:

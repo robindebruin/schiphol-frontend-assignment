@@ -1,3 +1,5 @@
+import debounce from "debounce";
+
 type FlightSearchInputProps = {
   handleSearch: (query: string) => void;
 };
@@ -10,21 +12,23 @@ export const FlightSearchInput = ({ handleSearch }: FlightSearchInputProps) => {
     }
     handleSearch(query);
   };
+  const filterFlightsDebounce = (q: string, debounceTime = 300) =>
+    debounce(() => filterFlights(q), debounceTime);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    filterFlights(e.target.value);
-    // TODO: use debounce
+    filterFlightsDebounce(e.target.value)();
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    // TODO: use to ignore debounce
     if (e.key === "Enter") {
-      filterFlights(e.currentTarget.value);
+      // clears the debounce
+      filterFlightsDebounce(e.currentTarget.value).trigger();
     }
   };
 
+  // TODO: add clear button
+
   return (
-    // TODO: add clear button
     <div className="h-32 flex items-center max-w-[664px] m-auto">
       <input
         type="text"
