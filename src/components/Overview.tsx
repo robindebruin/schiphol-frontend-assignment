@@ -36,11 +36,15 @@ export const Overview = () => {
 
   const filterFlights = (query: string) => {
     if (!data) return;
+    if (query.length < 3) return;
 
     const result = data.flights.filter((flight) => {
       return flight.airport.toLowerCase().includes(query.toLowerCase());
     });
-    setFilteredFlights(result);
+
+    const limitedResult = result.slice(0, 5);
+
+    setFilteredFlights(limitedResult);
   };
 
   // TODO: use loading component
