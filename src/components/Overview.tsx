@@ -49,6 +49,7 @@ export const Overview = () => {
 
   return (
     <div>
+      {/* TODO: add clear button */}
       <input type="text" onChange={handleChange} onKeyDown={handleKeyDown} />
       <FlightsList flights={filteredFlights} />
     </div>

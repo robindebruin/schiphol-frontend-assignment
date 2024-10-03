@@ -1,37 +1,23 @@
-import dayjs from "dayjs";
 import { useState } from "react";
 import { Flight } from "../data/types/flights";
 import { FlightListItem } from "./FlightListItem";
+import { FlightsSort } from "./FlightsSort";
 
 type FlightsListProps = {
   flights: Flight[];
 };
 
-type Sort = "asc" | "desc";
-
-const createDate = (flight: Flight) =>
-  dayjs(`${flight.date} ${flight.expectedTime}`);
-
 export const FlightsList = ({ flights }: FlightsListProps) => {
-  const [sort, setSort] = useState<Sort>("asc");
-
-  const handleSort = () => setSort(sort === "asc" ? "desc" : "asc");
-
-  const sortedFlights = flights.sort((a, b) => {
-    if (sort === "asc") {
-      return createDate(a).isAfter(createDate(b)) ? 1 : -1;
-    }
-    return createDate(a).isAfter(createDate(b)) ? -1 : 1;
-  });
+  const [sortedFlights, setSortedFlights] = useState<Flight[]>(flights);
 
   return (
-    <div>
-      <button onClick={handleSort}>Sort {sort}</button>
+    <>
+      <FlightsSort flights={flights} handleSort={setSortedFlights} />
       <ul>
         {sortedFlights.map((flight) => (
           <FlightListItem key={flight.flightIdentifier} flight={flight} />
         ))}
       </ul>
-    </div>
+    </>
   );
 };
