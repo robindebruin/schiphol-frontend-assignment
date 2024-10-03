@@ -1,50 +1,23 @@
-# React + TypeScript + Vite
+# Toeliching opdracht
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Om deze app lokaal te testen:
 
-Currently, two official plugins are available:
+1. Installeer de depencies `npm install`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+2. Start de backend `npm run server`
 
-## Expanding the ESLint configuration
+3. Start de frontend `npm run dev`, navigeer naar http://localhost:5173/
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+4. Test de app `npm run test`
 
-- Configure the top-level `parserOptions` property like this:
+Toelichting opdracht
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Omdat de voorbeelddata die gegeven is, data is die je normaliter zou willen ophalen van de server met de laatste beschikbare data, heb ik een simpele server gemaakt met 'express' welke de search query filtering afhandelt. Om het simpel te houden heb ik dit dezelfde repo gedaan als de frontend.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+De frontend is gemaakt met React en Vite. Bij het typen in het input veld begint de app direct met zoeken er zit een simpele debounce van 300ms, idealiter zouden vorige request afgebroken worden zodat er geen race conditions ontstaan, dit is iets wat boven aan mijn TODO lijst staat. Ik heb gebruik gemaakt van tanstack/react-query zodat caching en alle states met betrekking tot het fetchen afgehandeld worden door deze library.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Voor de styling heb ik tailwind gebruikt waar ik de geleverde kleuren heb geintegreerd.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+Voor testen heb ik wat simpele test toegevoegd die een simpele happy en sad flows testen, deze zouden nog wat kunnen worden uitgebreid.
+
+Er staan nog wat Todo's door de app heen die voornamelijk zijn voor intenties die ik had om te doen maar niet al te veel afgeleid wilde worden met side-quest.
