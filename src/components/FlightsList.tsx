@@ -50,21 +50,65 @@ export const FlightsList = ({ query, sort }: FlightsListProps) => {
   // TODO: add no results found vs no input
   if (query.length < 3) return;
 
-  // TODO: add accessibility
   return (
     <ul aria-label="list of flights" role="list" data-testid="list-of-flights">
       {sortFlights(sort, data?.flights)?.map((flight) => (
         <li
           key={flight.flightIdentifier}
-          className="flex justify-center mb-2 w-full items-center h-14 bg-white border border-gray-200 rounded-md shadow text-[color:--grey-storm] px-2"
-          role="listitem"
-          aria-label={`Flight from ${flight.airport}, scheduled on ${dayjs(
-            flight.date
-          ).format("DD-MM-YYYY")} at ${flight.expectedTime}`}
+          className="flex justify-between mb-2 w-full items-center h-14 bg-white border border-gray-200 rounded-md shadow text-[color:--grey-storm] px-2"
         >
-          <div className="w-1/3 flex text-lg"> {flight.airport}</div>
-          <div className="w-1/3">{dayjs(flight.date).format("DD-MM-YYYY")}</div>
-          <div className="w-1/3 flex justify-end">{flight.expectedTime}</div>
+          <dl className="pr-1 w-1/12" aria-label="Date">
+            <dt className="sr-only">Date</dt>
+            <dd>
+              <span className="text-sm font-bold">
+                {dayjs(flight.date).format("DD-MM")}
+              </span>
+            </dd>
+            <dd>
+              <span className="text-zinc-600">
+                {dayjs(flight.date).format("YYYY")}
+              </span>
+            </dd>
+          </dl>
+
+          <dl aria-label="Airport and flight number" className=" w-1/3">
+            <dt className="sr-only">Airport</dt>
+            <dd>
+              <div className="inline-flex gap-0.5">
+                <span className="text-lg font-bold">{flight.airport}</span>
+              </div>
+            </dd>
+
+            <dt className="sr-only">Flight number</dt>
+            <dd>
+              <span className="text-text-s text-color-neutral-50">
+                {flight.flightNumber}
+              </span>
+            </dd>
+          </dl>
+
+          <dl
+            className="pr-1  w-1/3 flex justify-end"
+            aria-label="Flight times"
+          >
+            <span>
+              {flight.originalTime !== flight.expectedTime && (
+                <>
+                  <dt className="sr-only">Original time</dt>
+                  <dd>
+                    <del>{flight.originalTime}</del>
+                  </dd>
+                </>
+              )}
+
+              <dt className="sr-only">Expected time</dt>
+              <dd>
+                <ins className="relative font-bold no-underline decoration-0 text-color-brand-50 group-hover/entry:text-color-brand-150 group-focus-visible/entry:text-color-brand-150">
+                  {flight.expectedTime}
+                </ins>
+              </dd>
+            </span>
+          </dl>
         </li>
       ))}
     </ul>
