@@ -31,12 +31,19 @@ export const FlightsList = ({ query, sort }: FlightsListProps) => {
 
   // TODO: make proper loading and error components
   if (isPending)
-    return <div className="text-xl text-fuchsia-500">"Loading..."</div>;
+    return (
+      <div
+        className="text-xl text-fuchsia-500"
+        data-testid="flight-list-loading"
+      >
+        "Loading..."
+      </div>
+    );
 
   if (error)
     return (
-      <div className="text-xl text-red-500">
-        {`"An error has occurred: ${error.message}`}
+      <div className="text-xl text-red-500" data-testid="flight-list-error">
+        {`An error has occurred: ${error.message}`}
       </div>
     );
 
@@ -45,7 +52,7 @@ export const FlightsList = ({ query, sort }: FlightsListProps) => {
 
   // TODO: add accessibility
   return (
-    <ul aria-label="list of flights" role="list">
+    <ul aria-label="list of flights" role="list" data-testid="list-of-flights">
       {sortFlights(sort, data?.flights)?.map((flight) => (
         <li
           key={flight.flightIdentifier}

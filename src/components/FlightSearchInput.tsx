@@ -40,6 +40,7 @@ export const FlightSearchInput = ({ handleSearch }: FlightSearchInputProps) => {
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         aria-label="Search for arriving flights"
+        data-testid="flight-search-input"
       />
     </div>
   );
