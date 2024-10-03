@@ -1,15 +1,46 @@
+import { queryOptions, useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
-import { Flight } from "../data/types/flights";
+import { FlightsResponse } from "../data/types/flights";
+import { Sort, sortFlights } from "./sortFlights";
 
 type FlightsListProps = {
-  flights: Flight[];
+  query: string;
+  sort: Sort;
 };
 
-export const FlightsList = ({ flights }: FlightsListProps) => {
+const fetchFlights = (query: string): Promise<FlightsResponse> =>
+  // TODO: put the URL in a config file
+  fetch(
+    "http://127.0.0.1:3000/flights?" +
+      new URLSearchParams({
+        airport: query,
+        limit: "5",
+        order_by: "date:desc", // ignored for time purposes
+      })
+  ).then((res) => res.json());
+
+const fetchFlightsOptions = (query: string) => {
+  return queryOptions({
+    queryKey: ["flightsData", query],
+    queryFn: () => fetchFlights(query),
+  });
+};
+
+export const FlightsList = ({ query, sort }: FlightsListProps) => {
+  const { isPending, error, data } = useQuery(fetchFlightsOptions(query));
+
+  // TODO: make proper loading and error components
+  if (isPending)
+    return <div className="text-xl text-fuchsia-500">"Loading..."</div>;
+
+  if (error) return "An error has occurred: " + error.message;
+
+  if (query.length < 3) return;
+
   // TODO: add accessibility
   return (
     <ul aria-label="list of flights" role="list">
-      {flights.map((flight) => (
+      {sortFlights(sort, data?.flights)?.map((flight) => (
         <li
           key={flight.flightIdentifier}
           className="flex justify-center mb-2 w-full items-center h-14 bg-white border border-gray-200 rounded-md shadow text-[color:--grey-storm] px-2"

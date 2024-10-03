@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Flights } from "./components/Flights";
 import { Header } from "./components/Header";
-import { Overview } from "./components/Overview";
 
 function App() {
   const queryClient = new QueryClient();
@@ -8,7 +8,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Header />
-      <Overview />
+      <Flights />
     </QueryClientProvider>
   );
 }

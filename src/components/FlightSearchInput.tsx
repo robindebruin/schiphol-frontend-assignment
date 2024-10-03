@@ -1,26 +1,14 @@
-import { Flight } from "../data/types/flights";
-
 type FlightSearchInputProps = {
-  flights: Flight[];
-  handleSearch: (flights: Flight[]) => void;
+  handleSearch: (query: string) => void;
 };
 
-export const FlightSearchInput = ({
-  flights,
-  handleSearch,
-}: FlightSearchInputProps) => {
+export const FlightSearchInput = ({ handleSearch }: FlightSearchInputProps) => {
   const filterFlights = (query: string) => {
     if (query.length < 3) {
-      handleSearch([]);
+      handleSearch("");
       return;
     }
-
-    const result = flights.filter((flight) => {
-      return flight.airport.toLowerCase().includes(query.toLowerCase());
-    });
-
-    const limitedResult = result.slice(0, 5);
-    handleSearch(limitedResult);
+    handleSearch(query);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
